@@ -1,28 +1,33 @@
 {
   "categories": [
-    { "id": "1", "name": "Chest" },
-    { "id": "2", "name": "Back" },
-    { "id": "3", "name": "Legs" },
-    { "id": "4", "name": "Cardio" }
-  ],
-  "exercises": [
     {
       "id": "1",
-      "title": "Bench Press",
-      "currentWeight": 60,
-      "category": "Chest"
+      "name": "Strength",
+      "description": "Building muscle and bone density through resistance.",
+      "howTo": "Perform 3 sets of 8-12 reps. Focus on a 2-second 'up' and 3-second 'down' tempo.",
+      "benefit": "Increased metabolism and functional power."
     },
     {
       "id": "2",
-      "title": "Squats",
-      "currentWeight": 80,
-      "category": "Legs"
+      "name": "Cardio",
+      "description": "Improving heart health and endurance.",
+      "howTo": "Maintain a steady pace where you can still talk but feel out of breath.",
+      "benefit": "Improved circulation and better stamina."
     },
     {
       "id": "3",
-      "title": "Running",
-      "currentWeight": 0,
-      "category": "Cardio"
+      "name": "Yoga",
+      "description": "Connecting breath, body, and mind for balance.",
+      "howTo": "Hold each pose for 5 deep breaths. Move slowly between transitions.",
+      "benefit": "Enhanced flexibility and reduced stress."
     }
+  ],
+  "exercises": [
+    { "id": "101", "title": "Dumbbell Bench Press", "currentWeight": 20, "category": "Strength" },
+    { "id": "102", "title": "Bicep Curls", "currentWeight": 12, "category": "Strength" },
+    { "id": "201", "title": "Treadmill Power Walk", "currentWeight": 5, "category": "Cardio" },
+    { "id": "202", "title": "Stationary Bike", "currentWeight": 3, "category": "Cardio" },
+    { "id": "301", "title": "Warrior II Pose", "currentWeight": 0, "category": "Yoga" },
+    { "id": "302", "title": "Downward Dog", "currentWeight": 0, "category": "Yoga" }
   ]
 }
