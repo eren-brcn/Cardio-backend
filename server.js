@@ -3,15 +3,12 @@ const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 
-// Use default middlewares 
 server.use(middlewares);
-
-// Add custom routes if needed before the router
 server.use(router);
 
-// Render uses the PORT environment variable
+// Render needs to bind to 0.0.0.0 and use the PORT provided by the environment
 const PORT = process.env.PORT || 10000;
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`JSON Server is running on port ${PORT}`);
 });
