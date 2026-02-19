@@ -3,28 +3,35 @@
     {
       "id": "1",
       "name": "Chest",
-      "description": "Chest training primarily targets the pectoralis major and minor. It is essential for upper body pushing strength and creates a balanced, powerful physique.",
-      "howTo": "Keep your shoulder blades retracted (squeezed back and down). Control the weight during the descent and exhale as you push. Focus on the squeeze at the top without locking elbows.",
-      "benefit": "Improved pushing power, better posture, and high metabolic activation."
+      "description": "Chest training primarily targets the pectoralis major and minor. It is essential for upper body pushing strength.",
+      "howTo": "Keep shoulder blades retracted. Control the weight during the descent and exhale as you push.",
+      "benefit": "Improved pushing power and better posture."
     },
     {
       "id": "2",
       "name": "Back",
-      "description": "Back training involves the latissimus dorsi, rhomboids, and traps. A strong back protects your spine and is the foundation for almost every other major lift.",
-      "howTo": "Think about pulling with your elbows rather than your hands. Squeeze your shoulder blades together at the peak of the movement and maintain a neutral spine.",
-      "benefit": "Creates a strong 'V-taper' frame, improves spinal health, and balances posture."
+      "description": "Back training involves the latissimus dorsi and rhomboids. A strong back protects your spine.",
+      "howTo": "Pull with your elbows rather than your hands. Squeeze your shoulder blades together at the peak.",
+      "benefit": "Creates a strong frame and balances posture."
     },
     {
       "id": "3",
       "name": "Legs",
-      "description": "Leg day covers the quads, hamstrings, and glutes. These are the largest muscles in the body, meaning leg training burns the most calories and releases the most growth hormones.",
-      "howTo": "Keep your feet flat and core tight. Ensure your knees stay in line with your toes and don't cave inward. Descend until your thighs are parallel to the floor.",
-      "benefit": "Massive functional strength, explosive power, and the highest calorie burn of any workout."
+      "description": "Leg day covers the quads and glutes. These are the largest muscles in the body.",
+      "howTo": "Keep feet flat and core tight. Ensure your knees stay in line with your toes.",
+      "benefit": "Massive functional strength and high calorie burn."
+    },
+    {
+      "id": "4",
+      "name": "Yoga",
+      "description": "Yoga focuses on flexibility, balance, and mindful breathing to connect the mind and body.",
+      "howTo": "Move slowly through poses like Downward Dog or Warrior. Focus on deep nasal breathing and holding steady.",
+      "benefit": "Increased flexibility, reduced stress, and better core stability."
     }
   ],
   "exercises": [
     { "id": "101", "title": "Bench Press", "category": "Chest", "currentWeight": 72.5 },
-    { "id": "104", "title": "Lat Pulldown", "category": "Back", "currentWeight": 55 },
-    { "id": "106", "title": "Barbell Squat", "category": "Legs", "currentWeight": 80 }
+    { "id": "106", "title": "Barbell Squat", "category": "Legs", "currentWeight": 80 },
+    { "id": "111", "title": "Sun Salutation", "category": "Yoga", "currentWeight": 0 }
   ]
 }
