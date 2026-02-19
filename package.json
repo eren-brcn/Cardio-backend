@@ -1,0 +1,24 @@
+{
+  "name": "cardio-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db.json --port 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eren-brcn/Cardio-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eren-brcn/Cardio-backend/issues"
+  },
+  "homepage": "https://github.com/eren-brcn/Cardio-backend#readme",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.6"
+  }
+}
