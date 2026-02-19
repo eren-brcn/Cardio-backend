@@ -2,32 +2,36 @@
   "categories": [
     {
       "id": "1",
-      "name": "Strength",
-      "description": "Building muscle and bone density through resistance.",
-      "howTo": "Perform 3 sets of 8-12 reps. Focus on a 2-second 'up' and 3-second 'down' tempo.",
-      "benefit": "Increased metabolism and functional power."
+      "name": "Chest",
+      "description": "Chest training primarily targets the pectoralis major and minor. It is essential for upper body pushing strength and creates a balanced, powerful physique.",
+      "howTo": "Focus on 'controlled' movements. On pushing exercises, keep your shoulder blades tucked back and down. Don't lock your elbows at the top to keep tension on the muscles.",
+      "benefit": "Improved pushing power, better posture, and increased metabolic rate through large muscle activation."
     },
     {
       "id": "2",
-      "name": "Cardio",
-      "description": "Improving heart health and endurance.",
-      "howTo": "Maintain a steady pace where you can still talk but feel out of breath.",
-      "benefit": "Improved circulation and better stamina."
+      "name": "Back",
+      "description": "Back training involves the latissimus dorsi, rhomboids, and trapezius. A strong back is the foundation for almost every other lift and protects your spine.",
+      "howTo": "Think about 'pulling with your elbows' rather than your hands. Squeeze your shoulder blades together at the peak of the movement for maximum contraction.",
+      "benefit": "Creates the 'V-taper' look, improves spinal health, and balances out the front of your body to prevent rounded shoulders."
     },
     {
       "id": "3",
-      "name": "Yoga",
-      "description": "Connecting breath, body, and mind for balance.",
-      "howTo": "Hold each pose for 5 deep breaths. Move slowly between transitions.",
-      "benefit": "Enhanced flexibility and reduced stress."
+      "name": "Legs",
+      "description": "Leg day covers the quads, hamstrings, and glutes. Since these are the largest muscles in the body, training them burns the most calories and releases the most growth hormones.",
+      "howTo": "Keep your feet flat on the floor. On squats, ensure your knees stay in line with your toes and don't cave inward. Maintain a neutral spine throughout.",
+      "benefit": "Massive functional strength for daily life, explosive power, and the highest calorie burn of any workout type."
     }
   ],
   "exercises": [
-    { "id": "101", "title": "Dumbbell Bench Press", "currentWeight": 20, "category": "Strength" },
-    { "id": "102", "title": "Bicep Curls", "currentWeight": 12, "category": "Strength" },
-    { "id": "201", "title": "Treadmill Power Walk", "currentWeight": 5, "category": "Cardio" },
-    { "id": "202", "title": "Stationary Bike", "currentWeight": 3, "category": "Cardio" },
-    { "id": "301", "title": "Warrior II Pose", "currentWeight": 0, "category": "Yoga" },
-    { "id": "302", "title": "Downward Dog", "currentWeight": 0, "category": "Yoga" }
+    { "id": "101", "title": "Incline Barbell Press", "category": "Chest", "currentWeight": 60 },
+    { "id": "102", "title": "Dumbbell Flyes", "category": "Chest", "currentWeight": 14 },
+    { "id": "103", "title": "Push-ups", "category": "Chest", "currentWeight": 0 },
+    { "id": "104", "title": "Lat Pulldown", "category": "Back", "currentWeight": 55 },
+    { "id": "105", "title": "Seated Cable Row", "category": "Back", "currentWeight": 45 },
+    { "id": "106", "title": "Deadlift", "category": "Back", "currentWeight": 100 },
+    { "id": "107", "title": "Barbell Squat", "category": "Legs", "currentWeight": 80 },
+    { "id": "108", "title": "Leg Press", "category": "Legs", "currentWeight": 150 },
+    { "id": "109", "title": "Walking Lunges", "category": "Legs", "currentWeight": 20 },
+    { "id": "110", "title": "Chest Press Machine", "category": "Chest", "currentWeight": 40 }
   ]
 }
