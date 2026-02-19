@@ -6,6 +6,23 @@
     { "id": "4", "name": "Cardio" }
   ],
   "exercises": [
-    { "id": "1", "title": "Bench Press", "currentWeight": 60, "category": "Chest" }
+    {
+      "id": "1",
+      "title": "Bench Press",
+      "currentWeight": 60,
+      "category": "Chest"
+    },
+    {
+      "id": "2",
+      "title": "Squats",
+      "currentWeight": 80,
+      "category": "Legs"
+    },
+    {
+      "id": "3",
+      "title": "Running",
+      "currentWeight": 0,
+      "category": "Cardio"
+    }
   ]
 }
