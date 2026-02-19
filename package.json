@@ -1,9 +1,9 @@
 {
   "name": "cardio-backend",
   "version": "1.0.0",
-  "scripts": {
-    "start": "npx json-server --watch db.json --port 10000"
-  },
+ "scripts": {
+  "start": "npx json-server --watch db.json --port 10000 --host 0.0.0.0"
+},
   "dependencies": {
     "json-server": "^0.17.4"
   }
