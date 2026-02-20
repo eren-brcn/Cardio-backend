@@ -30,36 +30,7 @@
     }
   ],
   "exercises": [
-    {
-      "id": "101",
-      "title": "Bench Press",
-      "currentWeight": 60,
-      "targetWeight": 80,
-      "reps": 10,
-      "sets": 3,
-      "isCompleted": false,
-      "category": "Chest"
-    },
-    {
-      "id": "102",
-      "title": "Treadmill Run",
-      "currentWeight": 0,
-      "targetWeight": 0,
-      "reps": 0,
-      "sets": 0,
-      "duration": 30,
-      "isCompleted": true,
-      "category": "Cardio"
-    },
-    {
-      "id": "106",
-      "title": "Barbell Squat",
-      "currentWeight": 80,
-      "targetWeight": 100,
-      "reps": 8,
-      "sets": 4,
-      "isCompleted": false,
-      "category": "Legs"
-    }
+    { "id": "101", "title": "Bench Press", "category": "Chest", "currentWeight": 60 },
+    { "id": "106", "title": "Barbell Squat", "category": "Legs", "currentWeight": 80 }
   ]
 }
