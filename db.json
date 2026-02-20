@@ -3,34 +3,63 @@
     {
       "id": "1",
       "name": "Chest",
-      "description": "Chest training targets the pectorals. It is essential for upper body pushing strength.",
-      "howTo": "Keep shoulder blades retracted and control the weight on the descent.",
+      "description": "Chest training primarily targets the pectoralis major and minor. It is essential for upper body pushing strength.",
+      "howTo": "Keep shoulder blades retracted. Control the weight during the descent and exhale as you push.",
       "benefit": "Improved pushing power and better posture."
     },
     {
       "id": "2",
       "name": "Back",
-      "description": "Back training involves the lats and rhomboids. It protects your spine.",
-      "howTo": "Pull with your elbows and squeeze your shoulder blades at the peak.",
-      "benefit": "Balanced posture and a stronger core."
+      "description": "Back training involves the latissimus dorsi and rhomboids. A strong back protects your spine.",
+      "howTo": "Pull with your elbows rather than your hands. Squeeze your shoulder blades together at the peak.",
+      "benefit": "Creates a strong frame and balances posture."
     },
     {
       "id": "3",
       "name": "Legs",
-      "description": "Leg day covers quads and glutes. These are the largest muscles in the body.",
-      "howTo": "Keep feet flat and core tight. Ensure knees stay in line with toes.",
+      "description": "Leg day covers the quads and glutes. These are the largest muscles in the body.",
+      "howTo": "Keep feet flat and core tight. Ensure your knees stay in line with your toes.",
       "benefit": "Massive functional strength and high calorie burn."
     },
     {
       "id": "4",
       "name": "Cardio",
-      "description": "Cardio improves heart health and endurance.",
-      "howTo": "Maintain a steady pace that raises your heart rate.",
-      "benefit": "Better stamina and cardiovascular health."
+      "description": "Cardio training improves cardiovascular health and endurance.",
+      "howTo": "Maintain a steady pace that elevates your heart rate.",
+      "benefit": "Better stamina and heart health."
     }
   ],
   "exercises": [
-    { "id": "101", "title": "Bench Press", "category": "Chest", "currentWeight": 60 },
-    { "id": "102", "title": "Treadmill Run", "category": "Cardio", "currentWeight": 0 }
+    {
+      "id": "101",
+      "title": "Bench Press",
+      "currentWeight": 60,
+      "targetWeight": 80,
+      "reps": 10,
+      "sets": 3,
+      "isCompleted": false,
+      "category": "Chest"
+    },
+    {
+      "id": "102",
+      "title": "Treadmill Run",
+      "currentWeight": 0,
+      "targetWeight": 0,
+      "reps": 0,
+      "sets": 0,
+      "duration": 30,
+      "isCompleted": true,
+      "category": "Cardio"
+    },
+    {
+      "id": "106",
+      "title": "Barbell Squat",
+      "currentWeight": 80,
+      "targetWeight": 100,
+      "reps": 8,
+      "sets": 4,
+      "isCompleted": false,
+      "category": "Legs"
+    }
   ]
 }
