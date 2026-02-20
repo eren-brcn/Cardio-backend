@@ -32,5 +32,6 @@
   "exercises": [
     { "id": "101", "title": "Bench Press", "category": "Chest", "currentWeight": 60 },
     { "id": "106", "title": "Barbell Squat", "category": "Legs", "currentWeight": 80 }
-  ]
+  ],
+  "metadata": { "lastUpdated": "2026-02-20-v2" }
 }
