@@ -5,7 +5,6 @@ require("dotenv").config();
 const { connectMongo } = require("./config/db");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
-const adminRouter = require("./routes/admin");
 const programRouter = require("./routes/programs");
 const { requireAuth } = require("./middleware/auth");
 
@@ -43,9 +42,7 @@ server.use(middlewares);
 
 server.use("/auth", authRouter);
 server.use("/users", usersRouter);
-server.use("/admin", requireAuth, adminRouter);
-server.use("/programs", programRouter);
-server.use("/admin/programs", requireAuth, programRouter);
+server.use("/programs", requireAuth, programRouter);
 
 server.use(router);
 

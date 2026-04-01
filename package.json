@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "start": "node src/server.js",
-    "create:admin": "node scripts/createAdmin.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
