@@ -47,7 +47,6 @@ const defaultCategories = [
   }
 ];
 
-// CORS Configuration - Restrictive in production
 const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
@@ -56,7 +55,7 @@ const corsOptions = {
       "http://localhost:5175",
       "http://localhost:5176",
       "http://localhost:5177",
-      "https://cardioweb.vercel.app", // Production frontend URL
+      "https://cardioweb.vercel.app",
       process.env.FRONTEND_URL
     ].filter(Boolean);
 
@@ -111,6 +110,7 @@ app.get("/exercises", requireAuth, async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Keep the latest logged weight per exercise/category pair.
     const byExercise = new Map();
     (user.workouts || []).forEach((entry) => {
       const title = String(entry.exerciseName || "").trim();

@@ -5,7 +5,6 @@ const programRouter = express.Router();
 
 const ownsProgram = (program, userId) => String(program.createdBy) === String(userId);
 
-// Create personal program
 programRouter.post("/", async (req, res) => {
   try {
     const { name, description, duration, difficulty, phases } = req.body;
@@ -31,7 +30,6 @@ programRouter.post("/", async (req, res) => {
   }
 });
 
-// Get current user's programs
 programRouter.get("/", async (req, res) => {
   try {
     const programs = await WorkoutProgram.find({ createdBy: req.auth.userId })
@@ -44,7 +42,6 @@ programRouter.get("/", async (req, res) => {
   }
 });
 
-// Get personal program details
 programRouter.get("/:programId", async (req, res) => {
   try {
     const { programId } = req.params;
@@ -64,7 +61,6 @@ programRouter.get("/:programId", async (req, res) => {
   }
 });
 
-// Update personal program
 programRouter.put("/:programId", async (req, res) => {
   try {
     const { programId } = req.params;
@@ -100,7 +96,6 @@ programRouter.put("/:programId", async (req, res) => {
   }
 });
 
-// Delete personal program
 programRouter.delete("/:programId", async (req, res) => {
   try {
     const { programId } = req.params;

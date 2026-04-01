@@ -126,4 +126,44 @@ usersRouter.get("/me/progress", requireAuth, async (req, res) => {
   }
 });
 
+usersRouter.get("/me/export", requireAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.auth.userId).lean();
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.json({
+      exportedAt: new Date().toISOString(),
+      profile: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      },
+      workouts: user.workouts || []
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+usersRouter.delete("/me", requireAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.auth.userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await user.deleteOne();
+    return res.json({ message: "Account deleted" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = usersRouter;

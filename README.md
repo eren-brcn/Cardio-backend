@@ -1,38 +1,40 @@
 # Cardio Backend
 
-Express + MongoDB backend for CardioWeb. It provides authentication, user workout tracking, progress analytics, and personal program management.
+This is the API for CardioWeb.
 
-## Live
-- API Base URL: https://cardio-backend-1-lq31.onrender.com
+It handles:
+- user authentication
+- workout storage
+- progress data for charts
+- personal training programs
 
-## Features
-- JWT authentication (register/login)
-- User workout storage in MongoDB
-- Progress summary endpoint for profile charts
-- Personal workout programs (CRUD, owner-scoped)
-- Exercise endpoints backed by user workout history
-- Built-in categories endpoint
-- Security hardening:
-  - helmet
-  - CORS allowlist
-  - auth-specific rate limiting
-  - global API rate limiting
-  - structured request logging with morgan
-- Health endpoint for uptime checks
+## Live API
+- Base URL: https://cardio-backend-1-lq31.onrender.com
 
-## Tech Stack
+## Main Capabilities
+- JWT auth (register/login)
+- User-based workout tracking in MongoDB
+- Progress summary endpoint for profile analytics
+- Owner-scoped program CRUD
+- Exercise and category endpoints used by the frontend
+- Account data export and account deletion endpoints
+- Health check endpoint for deploy monitoring
+
+## Security and API Guardrails
+- `helmet` for secure headers
+- CORS allowlist (frontend domain)
+- Rate limiting (global + auth routes)
+- Request logging with `morgan`
+
+## Stack
 - Node.js
 - Express 4
-- Mongoose
+- MongoDB + Mongoose
 - bcryptjs
 - jsonwebtoken
-- cors
-- helmet
-- express-rate-limit
-- morgan
 
 ## Environment Variables
-Create an .env file:
+Create a `.env` file in the backend root:
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
@@ -42,42 +44,49 @@ NODE_ENV=production
 PORT=10001
 ```
 
-## Run Locally
-Install dependencies and start server:
+## Local Development
+1. Install dependencies:
 
 ```bash
 npm install
-npm start
 ```
 
-Dev mode:
+2. Start in development mode:
 
 ```bash
 npm run dev
 ```
 
-## Core Endpoints
+3. Start in production mode locally (optional):
+
+```bash
+npm start
+```
+
+## Core Routes
 Public:
-- GET /health
-- GET /categories
-- POST /auth/register
-- POST /auth/login
+- GET `/health`
+- GET `/categories`
+- POST `/auth/register`
+- POST `/auth/login`
 
 Authenticated:
-- GET /exercises
-- POST /exercises
-- DELETE /exercises/:exerciseId
-- GET /users/me/workouts
-- POST /users/me/workouts
-- GET /users/me/progress
-- GET /programs
-- POST /programs
-- GET /programs/:programId
-- PUT /programs/:programId
-- DELETE /programs/:programId
+- GET `/exercises`
+- POST `/exercises`
+- DELETE `/exercises/:exerciseId`
+- GET `/users/me/workouts`
+- POST `/users/me/workouts`
+- GET `/users/me/progress`
+- GET `/users/me/export`
+- DELETE `/users/me`
+- GET `/programs`
+- POST `/programs`
+- GET `/programs/:programId`
+- PUT `/programs/:programId`
+- DELETE `/programs/:programId`
 
-## Deployment Notes (Render)
-- Build command: npm install
-- Start command: npm start
-- Ensure FRONTEND_URL matches your Vercel domain exactly
-- Use /health endpoint to validate deployment status
+## Render Notes
+- Build command: `npm install`
+- Start command: `npm start`
+- Set `FRONTEND_URL` to your exact Vercel domain
+- Use `/health` after deploy for a quick smoke check
