@@ -3,7 +3,9 @@ const WorkoutProgram = require("../models/WorkoutProgram");
 
 const programRouter = express.Router();
 
-// Create program (admin only, enforced in server.js)
+const ownsProgram = (program, userId) => String(program.createdBy) === String(userId);
+
+// Create personal program
 programRouter.post("/", async (req, res) => {
   try {
     const { name, description, duration, difficulty, phases } = req.body;
@@ -29,11 +31,11 @@ programRouter.post("/", async (req, res) => {
   }
 });
 
-// Get all programs
-programRouter.get("/", async (_req, res) => {
+// Get current user's programs
+programRouter.get("/", async (req, res) => {
   try {
-    const programs = await WorkoutProgram.find()
-      .populate("createdBy", "name email")
+    const programs = await WorkoutProgram.find({ createdBy: req.auth.userId })
+      .sort({ createdAt: -1 })
       .lean();
 
     return res.json(programs);
@@ -42,16 +44,18 @@ programRouter.get("/", async (_req, res) => {
   }
 });
 
-// Get program details
+// Get personal program details
 programRouter.get("/:programId", async (req, res) => {
   try {
     const { programId } = req.params;
-    const program = await WorkoutProgram.findById(programId)
-      .populate("createdBy", "name email")
-      .populate("assignedUsers", "name email");
+    const program = await WorkoutProgram.findById(programId);
 
     if (!program) {
       return res.status(404).json({ message: "Program not found" });
+    }
+
+    if (!ownsProgram(program, req.auth.userId)) {
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     return res.json(program);
@@ -60,49 +64,17 @@ programRouter.get("/:programId", async (req, res) => {
   }
 });
 
-// Update program
+// Update personal program
 programRouter.put("/:programId", async (req, res) => {
   try {
     const { programId } = req.params;
-    const updates = req.body;
-
-    const program = await WorkoutProgram.findByIdAndUpdate(programId, updates, { new: true });
-
-    if (!program) {
-      return res.status(404).json({ message: "Program not found" });
-    }
-
-    return res.json(program);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-});
-
-// Delete program
-programRouter.delete("/:programId", async (req, res) => {
-  try {
-    const { programId } = req.params;
-    const program = await WorkoutProgram.findByIdAndDelete(programId);
-
-    if (!program) {
-      return res.status(404).json({ message: "Program not found" });
-    }
-
-    return res.json({ message: "Program deleted" });
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-});
-
-// Assign program to user
-programRouter.post("/:programId/assign", async (req, res) => {
-  try {
-    const { programId } = req.params;
-    const { userId } = req.body;
-
-    if (!userId) {
-      return res.status(400).json({ message: "userId is required" });
-    }
+    const updates = {
+      name: req.body.name,
+      description: req.body.description,
+      duration: req.body.duration,
+      difficulty: req.body.difficulty,
+      phases: req.body.phases
+    };
 
     const program = await WorkoutProgram.findById(programId);
 
@@ -110,14 +82,43 @@ programRouter.post("/:programId/assign", async (req, res) => {
       return res.status(404).json({ message: "Program not found" });
     }
 
-    if (!program.assignedUsers.includes(userId)) {
-      program.assignedUsers.push(userId);
-      await program.save();
+    if (!ownsProgram(program, req.auth.userId)) {
+      return res.status(403).json({ message: "Forbidden" });
     }
+
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value !== undefined) {
+        program[key] = value;
+      }
+    });
+
+    await program.save();
 
     return res.json(program);
   } catch (error) {
     return res.status(400).json({ message: error.message });
+  }
+});
+
+// Delete personal program
+programRouter.delete("/:programId", async (req, res) => {
+  try {
+    const { programId } = req.params;
+    const program = await WorkoutProgram.findById(programId);
+
+    if (!program) {
+      return res.status(404).json({ message: "Program not found" });
+    }
+
+    if (!ownsProgram(program, req.auth.userId)) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    await program.deleteOne();
+
+    return res.json({ message: "Program deleted" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 });
 
