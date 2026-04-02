@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
-const { requireAuth, requireSelfOrAdmin } = require("../middleware/auth");
+const { requireAuth } = require("../middleware/auth");
 const { summarizeProgress } = require("../utils/progress");
 
 const usersRouter = express.Router();
@@ -36,33 +36,6 @@ const validateWorkoutPayload = (body) => {
     }
   };
 };
-
-usersRouter.post("/:userId/workouts", requireAuth, requireSelfOrAdmin, async (req, res) => {
-  try {
-    const validation = validateWorkoutPayload(req.body);
-    if (validation.error) {
-      return res.status(400).json({ message: validation.error });
-    }
-
-    const { userId } = req.params;
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    user.workouts.push(validation.value);
-    await user.save();
-
-    return res.status(201).json({
-      message: "Workout added",
-      userId: user._id,
-      workoutsCount: user.workouts.length
-    });
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-});
 
 usersRouter.post("/me/workouts", requireAuth, async (req, res) => {
   try {
@@ -140,7 +113,6 @@ usersRouter.get("/me/export", requireAuth, async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt
       },

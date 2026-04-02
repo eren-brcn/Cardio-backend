@@ -19,22 +19,6 @@ const requireAuth = (req, res, next) => {
   }
 };
 
-const requireSelfOrAdmin = (req, res, next) => {
-  if (!req.auth) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  const isAdmin = req.auth.role === "admin";
-  const isSelf = req.auth.userId === req.params.userId;
-
-  if (!isAdmin && !isSelf) {
-    return res.status(403).json({ message: "Forbidden" });
-  }
-
-  return next();
-};
-
 module.exports = {
-  requireAuth,
-  requireSelfOrAdmin
+  requireAuth
 };

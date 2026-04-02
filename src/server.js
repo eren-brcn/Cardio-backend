@@ -9,6 +9,10 @@ const { connectMongo } = require("./config/db");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
 const programRouter = require("./routes/programs");
+const notificationsRouter = require("./routes/notifications");
+const nutritionRouter = require("./routes/nutrition");
+const socialRouter = require("./routes/social");
+const analyticsRouter = require("./routes/analytics");
 const User = require("./models/User");
 const { requireAuth } = require("./middleware/auth");
 
@@ -85,16 +89,53 @@ const apiLimiter = rateLimit({
   legacyHeaders: false
 });
 
+const writeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many write requests. Please try again later." }
+});
+
+const serverStartedAt = Date.now();
+const metrics = {
+  totalRequests: 0,
+  byMethod: { GET: 0, POST: 0, PUT: 0, DELETE: 0, PATCH: 0, OPTIONS: 0 },
+  byStatusFamily: { "2xx": 0, "3xx": 0, "4xx": 0, "5xx": 0 }
+};
+
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 app.use(apiLimiter);
+app.use((req, res, next) => {
+  metrics.totalRequests += 1;
+  metrics.byMethod[req.method] = (metrics.byMethod[req.method] || 0) + 1;
+
+  res.on("finish", () => {
+    const family = `${Math.floor(res.statusCode / 100)}xx`;
+    metrics.byStatusFamily[family] = (metrics.byStatusFamily[family] || 0) + 1;
+  });
+
+  next();
+});
 
 app.get("/health", (_req, res) => {
   res.json({
     status: "ok",
     service: "cardio-backend",
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/metrics", (_req, res) => {
+  const uptimeSeconds = Math.floor((Date.now() - serverStartedAt) / 1000);
+  res.json({
+    service: "cardio-backend",
+    uptimeSeconds,
+    requests: metrics,
+    memory: process.memoryUsage(),
     timestamp: new Date().toISOString()
   });
 });
@@ -216,6 +257,10 @@ app.delete("/exercises/:exerciseId", requireAuth, async (req, res) => {
 app.use("/auth", authLimiter, authRouter);
 app.use("/users", usersRouter);
 app.use("/programs", requireAuth, programRouter);
+app.use("/notifications", requireAuth, notificationsRouter);
+app.use("/nutrition", requireAuth, writeLimiter, nutritionRouter);
+app.use("/social", socialRouter);
+app.use("/analytics", requireAuth, writeLimiter, analyticsRouter);
 
 app.use((err, _req, res, _next) => {
   if (err?.message === "Not allowed by CORS") {

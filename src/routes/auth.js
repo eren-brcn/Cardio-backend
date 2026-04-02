@@ -12,8 +12,7 @@ const toAuthResponse = (user) => {
   const token = jwt.sign(
     {
       userId: String(user._id),
-      email: user.email,
-      role: user.role
+      email: user.email
     },
     getJwtSecret(),
     { expiresIn: "7d" }
@@ -24,8 +23,7 @@ const toAuthResponse = (user) => {
     user: {
       id: user._id,
       name: user.name,
-      email: user.email,
-      role: user.role
+      email: user.email
     }
   };
 };
@@ -58,8 +56,7 @@ authRouter.post("/register", async (req, res) => {
     const user = await User.create({
       name: normalizedName,
       email: normalizedEmail,
-      passwordHash,
-      role: "user"
+      passwordHash
     });
 
     return res.status(201).json(toAuthResponse(user));
