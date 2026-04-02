@@ -235,6 +235,7 @@ analyticsRouter.get("/summary/monthly", requireAuth, async (req, res) => {
       return wDate >= targetMonth && wDate < nextMonth;
     });
 
+    // Keep the summary cheap: compute aggregates from the filtered in-memory slice.
     const totalWeight = monthlyWorkouts.reduce((sum, w) => sum + (w.currentWeight || 0), 0);
     const avgReps = monthlyWorkouts.length > 0
       ? (monthlyWorkouts.reduce((sum, w) => sum + (w.reps || 0), 0) / monthlyWorkouts.length).toFixed(1)
@@ -270,6 +271,7 @@ analyticsRouter.get("/progression", requireAuth, async (req, res) => {
       const exercise = String(w.exerciseName || "").trim();
       if (!exercise) return;
 
+      // Store one record per exercise and keep only the best (max) weight.
       if (!exerciseMaxes[exercise]) {
         exerciseMaxes[exercise] = {
           name: exercise,

@@ -110,6 +110,7 @@ app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 app.use(apiLimiter);
 app.use((req, res, next) => {
+  // Lightweight in-memory counters for quick operational visibility.
   metrics.totalRequests += 1;
   metrics.byMethod[req.method] = (metrics.byMethod[req.method] || 0) + 1;
 
@@ -258,6 +259,7 @@ app.use("/auth", authLimiter, authRouter);
 app.use("/users", usersRouter);
 app.use("/programs", requireAuth, programRouter);
 app.use("/notifications", requireAuth, notificationsRouter);
+// Write-heavy routes get an extra limiter to reduce accidental or abusive bursts.
 app.use("/nutrition", requireAuth, writeLimiter, nutritionRouter);
 app.use("/social", socialRouter);
 app.use("/analytics", requireAuth, writeLimiter, analyticsRouter);

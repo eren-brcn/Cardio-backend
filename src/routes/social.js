@@ -44,6 +44,7 @@ socialRouter.post("/:userId/follow", requireAuth, async (req, res) => {
       targetUser.followers.push(req.auth.userId);
     }
 
+    // Save both sides so follow/follower counts stay consistent.
     await currentUser.save();
     await targetUser.save();
 
@@ -105,6 +106,7 @@ socialRouter.get("/leaderboard/weight", async (req, res) => {
           followersCount: (user.followers || []).length
         };
       })
+      // Rank in memory after projection so we sort by computed totals.
       .sort((a, b) => b.totalWeight - a.totalWeight);
 
     return res.json(leaderboard);

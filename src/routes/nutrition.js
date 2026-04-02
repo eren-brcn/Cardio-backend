@@ -60,6 +60,7 @@ nutritionRouter.get("/meals", requireAuth, async (req, res) => {
       if (Number.isNaN(dateObj.getTime())) {
         return res.status(400).json({ message: "date is invalid" });
       }
+      // Use [start, nextDay) window so timezone offsets do not double-count entries.
       const nextDay = new Date(dateObj);
       nextDay.setDate(nextDay.getDate() + 1);
 
@@ -131,6 +132,7 @@ nutritionRouter.get("/meals/summary", requireAuth, async (req, res) => {
 
     meals.forEach((meal) => {
       const dateKey = new Date(meal.mealDate).toISOString().split("T")[0];
+      // Bucket by day so chart data is already grouped for the frontend.
       if (!dailyData[dateKey]) {
         dailyData[dateKey] = {
           calories: 0,
